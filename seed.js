@@ -1,6 +1,15 @@
 const db = require('./database.js');
+/*
+let fs = require('fs')
 
+let sqlite3 = require('sqlite3')
 
+let database = new sqlite3.Database('./database.db')
+
+let sqlBuffer = fs.readFileSync('./seed.sql')
+
+let sqlString = sqlBuffer.toString()
+*/
 let characters_list = [
  {
    first_name: "Homer",
@@ -150,6 +159,13 @@ const voiced_by_list = [
 	{name: "Marcia Wallace"}, // Edna Krabappel
 	{name: "Russi Taylor"}, // Martin Prince
 ]
+/*
+database.exec(sqlString, err=>{
+	if(err) console.log(err)
+	else console.log("Database.exec() was successful")
+})
+*/
+
 
 const deleteCharactersTable = "DELETE FROM characters"
 const deletePlaceTable = "DELETE FROM place_of_interest"
@@ -163,6 +179,7 @@ const insertIntoOccupTable = "INSERT INTO occupations VALUES (?, ?)"
 const insertIntoLastNameTable = "INSERT INTO last_name VALUES (?)"
 const insertIntoVoicedTable = "INSERT INTO voiced_by_actors VALUES (?)"
 
+
 db.run(deleteCharactersTable, err=>{
   if(err) console.log('Could not delete characters table', err)
   else{
@@ -171,59 +188,57 @@ db.run(deleteCharactersTable, err=>{
 	  db.run(insertIntoCharactersTable, characterData, err=>{
 	    if(err) console.log('Could not insert into characters table.', err)
 	 	else console.log(`${character.first_name} successfully added to the database!`)
+	  })
+	})
+	db.run(deletePlaceTable, err=>{
+  	  if(err) console.log('Could not delete place of interest table', err)
+  	  else{
+    	place_of_interest_list.forEach(place=>{
+ 	  	  let placeData = [place.name]
+	      db.run(insertIntoPlaceTable, placeData, err=>{
+	   	    if(err) console.log('Could not insert into place of interest table.')
+	 	    else console.log(`${place.name} successfully added to the database!`)
+		  })
 		})
+      db.run(deleteOcuppationTable, err=>{
+  		if(err) console.log('Could not delete place of interest table', err)
+  		else{
+    	  occupation_list.forEach(occupation=>{
+ 	  	    let occupationData = [occupation.name]
+	    	db.run(insertIntoOccupTable, occupationData, err=>{
+	   		  if(err) console.log('Could not insert into occupations table.', err)
+	 		  else console.log(`${occupation.name} successfully added to the database!`)
+			})
+		  })
+    	  db.run(deleteLastNameTable, err=>{
+  			if(err) console.log('Could not delete last name table', err)
+  			else{
+    		  last_name_list.forEach(lName=>{
+ 	  		    let lastNameData = [lName.name]
+	    		db.run(insertIntoLastNameTable, lastNameData, err=>{
+	   			  if(err) console.log('Could not insert into last name table.', err)
+	 			  else console.log(`${lName.name} successfully added to the database!`)
+				})
+			  })
+    		db.run(deleteVoicedTable, err=>{
+  			  if(err) console.log('Could not delete voiced by actors table', err)
+  			  else{
+    			voiced_by_list.forEach(actor=>{
+ 	  			  let actorData = [actor.name]
+	    		  db.run(insertIntoVoicedTable, actorData, err=>{
+	   				if(err) console.log('Could not insert into voiced by actors table.', err)
+	 				else console.log(`${actor.name} successfully added to the database!`)
+				  })
+				})
+  		 	  }
+			})
+  			}
+		  })
+  		}
+	   })
+  	  }
 	})
   }
 })
 
-db.run(deletePlaceTable, err=>{
-  if(err) console.log('Could not delete place of interest table', err)
-  else{
-    place_of_interest_list.forEach(place=>{
- 	  let placeData = [place.name]
-	    db.run(insertIntoPlaceTable, placeData, err=>{
-	   	if(err) console.log('Could not insert into place of interest table.')
-	 	else console.log(`${place.name} successfully added to the database!`)
-		})
-	})
-  }
-})
 
-db.run(deleteOcuppationTable, err=>{
-  if(err) console.log('Could not delete place of interest table', err)
-  else{
-    occupation_list.forEach(occupation=>{
- 	  let occupationData = [occupation.name]
-	    db.run(insertIntoOccupTable, occupationData, err=>{
-	   	if(err) console.log('Could not insert into occupations table.', err)
-	 	else console.log(`${occupation.name} successfully added to the database!`)
-		})
-	})
-  }
-})
-
-db.run(deleteLastNameTable, err=>{
-  if(err) console.log('Could not delete last name table', err)
-  else{
-    last_name_list.forEach(lName=>{
- 	  let lastNameData = [lName.name]
-	    db.run(insertIntoLastNameTable, lastNameData, err=>{
-	   	if(err) console.log('Could not insert into last name table.', err)
-	 	else console.log(`${lName.name} successfully added to the database!`)
-		})
-	})
-  }
-})
-
-db.run(deleteVoicedTable, err=>{
-  if(err) console.log('Could not delete voiced by actors table', err)
-  else{
-    voiced_by_list.forEach(actor=>{
- 	  let actorData = [actor.name]
-	    db.run(insertIntoVoicedTable, actorData, err=>{
-	   	if(err) console.log('Could not insert into voiced by actors table.', err)
-	 	else console.log(`${actor.name} successfully added to the database!`)
-		})
-	})
-  }
-})
