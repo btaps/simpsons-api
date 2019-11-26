@@ -1,5 +1,5 @@
-const db = require('./database.js');
-/*
+//const db = require('./database.js');
+
 let fs = require('fs')
 
 let sqlite3 = require('sqlite3')
@@ -9,7 +9,13 @@ let database = new sqlite3.Database('./database.db')
 let sqlBuffer = fs.readFileSync('./seed.sql')
 
 let sqlString = sqlBuffer.toString()
-*/
+
+database.exec(sqlString, err=>{
+	if(err) console.log(err)
+	else console.log("Database.exec() was successful")
+})
+
+/*
 let characters_list = [
  {
    first_name: "Homer",
@@ -128,9 +134,9 @@ const occupation_list = [
 const last_name_list = [
 	{name: "Simpson"},
 	{name: "Flanders"},
-	{name: "Van Houten"},// Milhouse Van Houten
+	{name: "Van Houten"},// Milhouse Van Houten, Kirk (millhouse dad)
 	{name: "Albertson"}, // Jeffrey Albertson (Comic Book Guy)
-	{name: "SMontgomery Burns"},//Charles Montgomery "Monty" Burns
+	{name: "Montgomery Burns"},//Charles Montgomery "Monty" Burns
 	{name: "Nahasapeemapetilon"},//Apu Nahasapeemapetilon
 	{name: "Krabappel"}, //Edna Krabappel
 	{name: "Hibbert"}, //Dr. Julius Hibbert 
@@ -146,6 +152,12 @@ const last_name_list = [
 	{name: "Muntz"}, // Nelson Muntz
 	{name: "Prince"}, // Martin Prince
 	{name: "MacDougal"}, // Dr. William MacDougal, better known as Groundskeeper Willie,
+	{name: "Szyslak"}, // Moe
+	{name: "Hutz"}, // Leonel Hutz
+	{name: "McClure"}, // troy mcclure
+	{name: "Brockman"}, // kent brockman
+	{name: "Krustofsky"}, // krusty
+	{name: "Hermann"} // Herman Hermann
 ]
 
 const voiced_by_list = [
@@ -153,18 +165,12 @@ const voiced_by_list = [
 	{name: "Nancy Cartwright"}, // Bart, Tod Flanders, Maggie, Nelson
 	{name: "Julie Kavner"}, // Marge
 	{name: "Yeardley Smith"}, // Lisa
-	{name: "Harry Shearer"}, // Ned Flanders, Lenny, Otto Mann, Mr. Burns, Dr. Hibbert, Principle Skinner
+	{name: "Harry Shearer"}, // Ned Flanders, Lenny, Otto Mann, Mr. Burns, Dr. Hibbert, Principle Skinner, 
 	{name: "Pamela Hayden"}, // Rod Flanders, Milhouse, Jimbo
-	{name: "Hank Azaria"}, //  Carl Carlson, Comic Book Guy, Apu, Dr. Nick, chief Wiggum, Cletus
+	{name: "Hank Azaria"}, //  Carl Carlson, Comic Book Guy, Apu, Dr. Nick, chief Wiggum, Cletus, Millhouse dad
 	{name: "Marcia Wallace"}, // Edna Krabappel
 	{name: "Russi Taylor"}, // Martin Prince
 ]
-/*
-database.exec(sqlString, err=>{
-	if(err) console.log(err)
-	else console.log("Database.exec() was successful")
-})
-*/
 
 
 const deleteCharactersTable = "DELETE FROM characters"
@@ -241,4 +247,4 @@ db.run(deleteCharactersTable, err=>{
   }
 })
 
-
+*/

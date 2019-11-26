@@ -42,8 +42,8 @@ let database = new sqlite3.Database('./database.db')
 
 const createCharactersTableQuery = `CREATE TABLE IF NOT EXISTS characters (
 first_name TEXT, 
-last_name INTEGER, 
-occupation INTEGER, 
+last_nameID INTEGER, 
+occupationID INTEGER, 
 catch_phrase TEXT, 
 age_range TEXT)`;
 
@@ -51,11 +51,11 @@ const createPlaceOfInterestTableQuery = `CREATE TABLE IF NOT EXISTS place_of_int
 name TEXT)`;
 
 const createOccupationTableQuery = `CREATE TABLE IF NOT EXISTS occupations (
-name TEXT, 
-location TEXT)`;
+title TEXT, 
+location INTEGER)`;
 
-const createLastNameTableQuery = `CREATE TABLE IF NOT EXISTS last_name (
-name TEXT)`;
+const createLastNameTableQuery = `CREATE TABLE IF NOT EXISTS last_names (
+last_name TEXT)`;
 
 const createVoicedByActorsTableQuery = `CREATE TABLE IF NOT EXISTS voiced_by_actors (
 name TEXT)`;
@@ -86,7 +86,7 @@ database.run(createOccupationTableQuery, err=>{
 })
 
 database.run(createLastNameTableQuery, err=>{
-	if(err) console.log('Create last name table failed!', err)
+	if(err) console.log('Create last names table failed!', err)
 	else console.log('Create last name table succeeded!')
 })
 
