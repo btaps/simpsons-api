@@ -1,6 +1,7 @@
 let express = require('express')
 let database = require('./database.js')
 let app = express()
+let characters = require('./characters/router')
 
 let queryPassInValues
 let queryString
@@ -10,13 +11,16 @@ const PORT = 9000
 
 // middleware
 app.use(express.json());
+app.use("/api/characters", characters)
 
-
+// build front end, index page for moongese app lab. send hmtl file
+// use orm sqlize library to refactor query strings that I wrote
+// put together routes the do more complicated 
 
 ///////////////////////////////
 //       CHARACTERS       /////
 ///////////////////////////////
-
+/*
 // get all characters
 app.get('/api/characters', (req, res)=>{
 	// create a string query
@@ -95,7 +99,7 @@ app.delete('/api/characters/:id', (req, res)=>{
   	}
   })
 })
-
+*/
 ///////////////////////////////
 //    Place Of Interest   /////
 ///////////////////////////////
