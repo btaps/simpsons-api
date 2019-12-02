@@ -29,6 +29,7 @@ INSERT INTO characters VALUES
 ("Waylon", 32, 1, "Mr. Burns is dead! Why do the good always die so young?", "Adult"), ("Marion Anthony 'Fat Tony'", 33, 6, "Bart, is it wrong to steal a loaf of bread to feed your starving family?", "Adult"),
 ("Legs", 3, 6, "I'm walking here", "Adult"), ("Louie", 3, 6, "You got it, boss", "Adult"),
 ("Jasper", 34, 19, "That's a Paddlin", "Senior");
+-- Added Miss Elizabeth Hoover via postman app.post. Miss hoover = characters.oid === 50
 
 INSERT INTO place_of_interest VALUES 
 ("Springfield Nuclear Power Plant"),("Moe's Tavern"),("Springfield Elementary School"),

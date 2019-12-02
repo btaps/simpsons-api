@@ -1,17 +1,34 @@
 let express = require('express')
 let database = require('./database.js')
-let app = express()
-let characters = require('./characters/router')
 
+let characters = require('./characters/router')
+let lastNames = require('./last_names/router')
+let occupations = require('./occupations/router')
+let placeOfInterest = require('./place_of_interest/router')
+let voicedByActors = require('./voiced_by_actors/router')
+let joinCharactersActors = require('./join_characters_actors/router')
+let joinCharactersPlaces = require('./join_characters_places/router')
+
+
+let app = express()
+/*
 let queryPassInValues
 let queryString
 let reqBody
-
+*/
 const PORT = 9000
 
 // middleware
 app.use(express.json());
 app.use("/api/characters", characters)
+app.use("/api/last_names", lastNames)
+app.use("/api/occupations", occupations)
+app.use("/api/place_of_interest", placeOfInterest)
+app.use("/api/voiced_by_actors", voicedByActors)
+// use actor id to find all characters played by actor/ delete with oid
+app.use("/api/characters/voiced_by_actors", joinCharactersActors)
+// use character id to find all places of interest to character/ delete with oid
+app.use("/api/characters/place_of_interest", joinCharactersPlaces)
 
 // build front end, index page for moongese app lab. send hmtl file
 // use orm sqlize library to refactor query strings that I wrote
@@ -103,7 +120,7 @@ app.delete('/api/characters/:id', (req, res)=>{
 ///////////////////////////////
 //    Place Of Interest   /////
 ///////////////////////////////
-
+/*
 app.get('/api/place_of_interest', (req, res)=>{
 	queryString = "SELECT * FROM place_of_interest"
 	database.all(queryString, (err, results)=>{
@@ -173,11 +190,11 @@ app.delete('/api/place_of_interest/:id', (req, res)=>{
   	}
   })
 })
-
+*/
 ///////////////////////////////
 //       OCUUPATIONS      /////
 ///////////////////////////////
-
+/*
 app.get('/api/occupations', (req, res)=>{
 	queryString = "SELECT * FROM occupations"
 	database.all(queryString, (err, results)=>{
@@ -222,7 +239,7 @@ app.put('/api/occupations/:id', (req, res)=>{
 
 app.post('/api/occupations', (req, res)=>{
  queryPassInValues = [req.body.title]
- queryString = "INSERT INTO occupations VALUES (?, NULL)"
+ queryString = "INSERT INTO occupations VALUES (?, ?)"
 
  database.run(queryString, queryPassInValues, err=>{
  	if(err){
@@ -247,8 +264,8 @@ app.delete('/api/occupations/:id', (req, res)=>{
   	}
   })
 })
-
-
+*/
+/*
 ///////////////////////////////
 //       LAST NAMES       /////
 ///////////////////////////////
@@ -282,12 +299,12 @@ app.get('/api/last_names/:id', (req, res)=>{
 })
 
 app.put('/api/last_names/:id', (req, res)=>{
-  queryPassInValues = [req.body.name, req.params.id]
+  queryPassInValues = [req.body.last_name, req.params.id]
   queryString =  "UPDATE last_names SET last_name = ? WHERE last_names.oid = ?"
 
   database.run(queryString, queryPassInValues, err=>{
   	if(err){
-  		console.log(`Couldn't update last name ${req.body.name}`, err)
+  		console.log(`Couldn't update last name ${req.body.last_name}`, err)
   		res.sendStatus(500)
   	}else{
   		res.sendStatus(200)
@@ -296,12 +313,12 @@ app.put('/api/last_names/:id', (req, res)=>{
 })
 
 app.post('/api/last_names', (req, res)=>{
- queryPassInValues = [req.body.name]
+ queryPassInValues = [req.body.last_name]
  queryString = "INSERT INTO last_names VALUES (?)"
 
  database.run(queryString, queryPassInValues, err=>{
  	if(err){
- 		console.log(`Couldn't insert name ${req.body.name} into last_names table`)
+ 		console.log(`Couldn't insert name ${req.body.last_name} into last_names table`, err)
  		res.sendStatus(500)
  	}else{
  		res.sendStatus(200)
@@ -322,11 +339,11 @@ app.delete('/api/last_names/:id', (req, res)=>{
   	}
   })
 })
-
+*/
 ///////////////////////////////
 //    Voiced By Actors    /////
 ///////////////////////////////  
-
+/*
 app.get('/api/voiced_by_actors', (req, res)=>{
 	queryString = "SELECT * FROM voiced_by_actors"
 	database.all(queryString, (err, results)=>{
@@ -396,12 +413,12 @@ app.delete('/api/voiced_by_actors/:id', (req, res)=>{
   	}
   })
 })
-
+*/
 ///////////////////////////////
 //   JOIN CHARACT_PLACES   ////
 ///////////////////////////////
 
-
+/*
 app.post('/api/characters/:id/place_of_interest', (req, res)=>{
 	queryPassInValues = [req.params.id, req.body.place_of_interest_id]
 	queryString = "INSERT INTO characters_place_of_interest VALUES (?, ?)"
@@ -425,11 +442,11 @@ app.delete('/api/characters/:id/place_of_interest', (req, res)=>{
 		}else res.sendStatus(200)
 	})
 })
-
+*/
 ///////////////////////////////
 //  JOIN CHARACT_VOICED_BY  ///
 ///////////////////////////////
-
+/*
 app.post('/api/characters/:id/voiced_by_actors', (req, res)=>{
 	queryPassInValues = [req.params.id, req.body.voiced_by_id]
 	queryString = "INSERT INTO characters_voiced_by VALUES (?, ?)"
@@ -453,7 +470,7 @@ app.delete('/api/characters/:id/voiced_by_actors', (req, res)=>{
 		}else res.sendStatus(200)
 	})
 })
-
+*/
 ///////////////////////////////
 //          PORT          /////
 ///////////////////////////////
