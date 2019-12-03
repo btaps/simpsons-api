@@ -1,3 +1,5 @@
+![Entity Relationship Diagram](images/Entity%20Relationship%20Diagram.png)
+
 # <center>Simpsons API Project</center>
 ***
 
