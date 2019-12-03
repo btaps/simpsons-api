@@ -24,10 +24,12 @@ To begin open up your terminal and find a directory in which you are comfortable
 ***DELETE*** | /api/characters/:id | Delete a character from our database using oid in SQL database. 
 
 Example:
+
 | Request | Response |
 ---| --- |
-localhost:9000/api/characters | {"first_name": "Bart", "last_nameID": 1,"occupationID": 2, "catch_phrase": "¡Ay, caramba!", "age_range": "Kid"}, {"first_name": "Homer", "last_nameID": 1, "occupationID": 1, "catch_phrase": "D'oh", "age_range": "Adult"}, {"first_name": "Marge","last_nameID": 1,"occupationID": 11,"catch_phrase": "Mmm~mmmmm","age_range": "Adult"}... etc
+localhost:9000/api/characters | {"first_name": "Bart", "last_nameID": 1,"occupationID": 2, "catch_phrase": "¡Ay, caramba!", "age_range": "Kid"}, {"first_name": "Homer", "last_nameID": 1, "occupationID": 1, "catch_phrase": "D'oh", "age_range": "Adult"}, {"first_name": "Marge","last_nameID": 1,"occupationID": 11,"catch_phrase": "Mmm~mmmmm","age_range": "Adult"}...etc
 localhost:9000/api/characters/:id | {"first_name": "Bart", "last_nameID": 1,"occupationID": 2, "catch_phrase": "¡Ay, caramba!", "age_range": "Kid"} OR (***status 200 \\ 500***)
+
 Again when using the ' :id ' we are targeting a single column in our table using the oid. We can use JSON to pass in values via postman. In this example we can change anything in the character ' Bart ' because we singled it out. We just would need to run the PUT route with a new value for which ever column (first_name, last_nameID, occupationID, catch_phrase, or age_range). After you run your route to you either get a result sent via JSON or a status of 200 if everything worked O.K. or status of 500 if something went wrong.
 
 ***
