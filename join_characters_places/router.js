@@ -1,3 +1,5 @@
+// these routes were made for strict manipulation of JOIN table characters_place_of_interest
+
 let express = require('express')
 let model = require('./model')
 

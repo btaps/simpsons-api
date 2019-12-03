@@ -16,8 +16,16 @@ let createOne = (values, callback)=>{
 	database.run("INSERT INTO characters VALUES (?, ?, ?, ?, ?)", values, callback)
 }
 
+let joinTableONE = (values, callback)=>{
+	database.run("INSERT INTO characters_place_of_interest VALUES (?, ?)", values, callback)
+}
+
+let joinTableTWO = (values, callback)=>{
+	database.run("INSERT INTO characters_voiced_by VALUES (?, ?)", values, callback)
+}
+
 let deleteOne = (values, callback)=>{
 	database.run("DELETE FROM characters WHERE characters.oid = ?", values, callback)
 }
 
-module.exports = {readAll, readOne, updateOne, createOne, deleteOne}
+module.exports = {readAll, readOne, updateOne, createOne, joinTableONE, joinTableTWO, deleteOne}

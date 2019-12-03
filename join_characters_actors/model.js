@@ -10,7 +10,7 @@ let createOne = (values, callback)=>{
 }
 
 let deleteOne = (values, callback)=>{
-	database.run("DELETE FROM voiced_by_actors WHERE characters_voiced_by.oid = ?", values, callback)
+	database.run("DELETE FROM characters_voiced_by WHERE characters_voiced_by.oid = ?", values, callback)
 }
 
 module.exports = {readOne, createOne, deleteOne}
